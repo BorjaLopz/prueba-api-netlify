@@ -3,8 +3,8 @@ const path = require("path");
 
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
 require("dotenv").config();
 
 const PORT = process.env.APP_PORT || 5001;
@@ -14,5 +14,5 @@ express()
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
   .get("/", (req, res) => res.send("HolaMundo!"))
-  .get("/beer", (req, res) => res.send("HOLA"))
+  .get("/beer", (req, res) => res.send("Hola BEER"))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
