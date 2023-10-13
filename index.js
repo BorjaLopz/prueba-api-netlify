@@ -2,7 +2,6 @@ const mysql = require("mysql2");
 const dotenv = require("dotenv");
 dotenv.config();
 
-
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -11,8 +10,11 @@ const pool = mysql.createPool({
 });
 
 pool.getConnection((err, conn) => {
-  if (err) console.log(err);
-  console.log("Connected successfully");
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Connected successfully");
+  }
 });
 
 module.exports = pool.promise();
