@@ -1,8 +1,12 @@
 const express = require("express");
-
 const app = express();
 
-const port = 3000;
+require("dotenv").config();
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+const port = process.env.APP_PORT || 3000;
 
 app.get("/", (req, res) => {
   res.send("Hola mundo!");
