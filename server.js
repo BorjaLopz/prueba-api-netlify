@@ -1,18 +1,24 @@
 const express = require("express");
-const path = require("path");
-
 const app = express();
-
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
+const bodyParser = require("body-parser");
 require("dotenv").config();
+const port = process.env.APP_PORT || 3000;
 
-const PORT = process.env.APP_PORT || 5001;
+app.use(bodyParser.json());
 
-express()
-  .use(express.static(path.join(__dirname, "public")))
-  .set("views", path.join(__dirname, "views"))
-  .set("view engine", "ejs")
-  .get("/", (req, res) => res.send("HolaMundo!"))
-  .get("/beer", (req, res) => res.send("Hola BEER"))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+const { getContenidoPruebaController } = require("./controllers/prueba");
+
+app.get("/", (req, res) => {
+  res.send("¡Hola, mundo!");
+});
+
+app.get("/prueba", (req, res) => {
+  res.send("¡Hola, mundo desde prueba!");
+});
+
+//Obtener un servicio por ID
+app.get("/prueba/:id", getContenidoPruebaController);
+
+app.listen(port, () => {
+  console.log(`La aplicación está en funcionamiento en el puerto ${port}`);
+});
